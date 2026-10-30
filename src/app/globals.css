@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand — sampled from ginerva_logo.png */
+  --color-navy-50: #eef0fa;
+  --color-navy-100: #dde1f3;
+  --color-navy-200: #b9c0e6;
+  --color-navy-400: #5a67b0;
+  --color-navy-600: #1d2f8a;
+  --color-navy-700: #132474;
+  --color-navy-800: #0f1d5c;
+  --color-navy-900: #0b1645;
+  --color-navy-950: #070e2e;
+
+  --color-lavender: #c0bbff;
+  --color-lavender-soft: #dfddff;
+  --color-mint: #47ffbf;
+  --color-mint-soft: #a3ffdf;
+  --color-ember: #c43b00;
+  --color-ember-soft: #e19d7f;
+  --color-forest: #133700;
+  --color-forest-soft: #899b7f;
+
+  /* Neutrals (cool, tinted toward navy) */
+  --color-ink: #0b1233;
+  --color-muted: #4a5170;
+  --color-line: #e2e5ee;
+  --color-stage: #eceef4;
+  --color-porcelain: #f6f7fa;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+
+  --radius-stage: 1.75rem;
+  --shadow-stage: 0 40px 70px -30px rgb(11 18 51 / 0.35);
+  --shadow-card: 0 1px 2px rgb(11 18 51 / 0.04), 0 12px 32px -12px rgb(11 18 51 / 0.12);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-porcelain);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-navy-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-mint);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1360px;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Full-width element whose content lines up with container-page, so scrolling rails can bleed off both edges. */
+@utility bleed-page {
+  padding-inline: max(1.25rem, calc((100% - 1360px) / 2 + 1.25rem));
+  @media (width >= 48rem) {
+    padding-inline: max(2.5rem, calc((100% - 1360px) / 2 + 2.5rem));
+  }
+}
+
+/* Hero slide background: porcelain under the copy, washing into the slide colour (--wash) behind the product. */
+.hero-wash {
+  background: linear-gradient(178deg, var(--color-porcelain) 34%, color-mix(in srgb, var(--wash) 50%, white) 68%, var(--wash));
+}
+@media (width >= 64rem) {
+  .hero-wash {
+    background: linear-gradient(104deg, var(--color-porcelain) 30%, color-mix(in srgb, var(--wash) 42%, white) 58%, var(--wash));
+  }
+}
+
+@keyframes slide-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* Product photography is shot on white: multiply lets it sit on any light stage. */
+@utility product-shot {
+  mix-blend-mode: multiply;
+  object-fit: contain;
+}
+
+/* Scroll reveal: hidden only when JS has opted in and the user allows motion (see MotionRoot). */
+@media (prefers-reduced-motion: no-preference) {
+  html.motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  /* Failsafe: if GSAP never boots, show content anyway. */
+  html.motion:not(.motion-ready) [data-reveal] {
+    animation: reveal-failsafe 0.4s 2.5s forwards;
+  }
+}
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Product card -> product hero morph (React <ViewTransition share="morph">) */
+::view-transition-group(.morph) {
+  animation-duration: 450ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
