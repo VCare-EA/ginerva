@@ -261,7 +261,7 @@ function Leadership() {
   return (
     <section aria-labelledby="leadership-heading" className="container-page grid gap-10 py-16 md:py-24 lg:grid-cols-12 lg:items-center">
       <div className="lg:col-span-4">
-        <div data-reveal className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[var(--radius-stage)] bg-navy-950 p-8">
+        <div data-reveal className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[var(--radius-stage)] flex items-end bg-navy-950 p-5 sm:p-8">
           <Image
             src="/leader-placeholder.jpg"
             alt={`Portrait of ${leader.name}`}
@@ -269,7 +269,7 @@ function Leadership() {
             sizes="(min-width: 1024px) 384px, 90vw"
             className="object-cover object-top"
           />
-          <SpeedLines unit={14} className="relative" />
+          <SpeedLines unit={14} className="relative origin-bottom-left scale-[0.45] sm:scale-[0.6]" />
         </div>
       </div>
       <div className="lg:col-span-7 lg:col-start-6">

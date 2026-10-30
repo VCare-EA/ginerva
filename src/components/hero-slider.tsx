@@ -54,7 +54,7 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
         <div className="lg:col-span-6">{children}</div>
 
         <div className="flex flex-col lg:col-span-6 lg:self-stretch">
-          <div aria-live={paused ? "polite" : "off"} className="relative h-[360px] sm:h-[460px] lg:h-auto lg:min-h-[520px] lg:flex-1">
+          <div aria-live={paused ? "polite" : "off"} className="relative h-[420px] sm:h-[520px] lg:h-auto lg:min-h-[520px] lg:flex-1">
             {slides.map((s, i) => {
               const t = themes[i % themes.length];
               const active = i === index;
@@ -70,7 +70,7 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
                 >
                   <span
                     aria-hidden
-                    className={`absolute left-0 top-0 -translate-x-6 text-[clamp(3rem,5.5vw,5rem)] font-semibold leading-none tracking-tighter text-transparent opacity-0 [-webkit-text-stroke:1.5px_var(--stroke)] ${enter} group-data-[active=true]:translate-x-0`}
+                    className={`absolute left-0 top-0 -translate-x-6 text-[clamp(1.75rem,5.5vw,5rem)] font-semibold leading-none tracking-tighter text-transparent opacity-0 [-webkit-text-stroke:1.5px_var(--stroke)] ${enter} group-data-[active=true]:translate-x-0`}
                     style={{ "--stroke": `color-mix(in srgb, ${t.shape} 45%, transparent)` } as CSSProperties}
                   >
                     {s.brand}
@@ -106,7 +106,7 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
                     style={{ background: t.accent }}
                   />
 
-                  <div className="absolute inset-x-[10%] bottom-[15%] top-[6%]">
+                  <div className="absolute inset-x-[4%] bottom-[24%] top-[6%] sm:inset-x-[8%] sm:bottom-[22%] lg:inset-x-[10%] lg:bottom-[15%]">
                     <Image
                       src={s.image.src}
                       alt={s.image.alt}
@@ -121,17 +121,17 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
                   </div>
 
                   <div
-                    className={`absolute -bottom-12 -right-1 w-[min(320px,82%)] translate-y-4 rounded-2xl border border-white/50 bg-[linear-gradient(135deg,rgb(255_255_255/0.42),rgb(255_255_255/0.1))] p-4 opacity-0 shadow-[inset_0_1px_0_rgb(255_255_255/0.7),0_24px_48px_-24px_rgb(11_18_51/0.35)] backdrop-blur-md backdrop-saturate-150 md:p-5 lg:-right-6 ${enter} group-data-[active=true]:translate-y-0 group-data-[active=true]:delay-500`}
+                    className={`absolute -bottom-12 -right-1 w-[min(230px,66%)] translate-y-4 rounded-xl border border-white/50 bg-[linear-gradient(135deg,rgb(255_255_255/0.42),rgb(255_255_255/0.1))] px-3.5 pt-3 opacity-0 shadow-[inset_0_1px_0_rgb(255_255_255/0.7),0_24px_48px_-24px_rgb(11_18_51/0.35)] backdrop-blur-md backdrop-saturate-150 sm:w-[min(280px,60%)] sm:rounded-2xl sm:p-4 lg:w-[min(320px,82%)] lg:p-5 lg:-right-6 ${enter} group-data-[active=true]:translate-y-0 group-data-[active=true]:delay-500`}
                   >
-                    <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: t.shape }}>
+                    <p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] sm:text-[11px]" style={{ color: t.shape }}>
                       <span aria-hidden className="size-1.5 rounded-full" style={{ background: t.shape }} />
                       {s.label}
                     </p>
-                    <p className="mt-2 text-lg font-semibold leading-snug tracking-tight text-navy-950">{s.name}</p>
-                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-navy-900/85">{s.tagline}</p>
+                    <p className="mt-1.5 text-sm font-semibold leading-snug tracking-tight text-navy-950 sm:mt-2 sm:text-base lg:text-lg">{s.name}</p>
+                    <p className="mt-1 hidden text-sm leading-relaxed text-navy-900/85 sm:line-clamp-2">{s.tagline}</p>
                     <Link
                       href={`/products/${s.slug}`}
-                      className="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-navy-800 underline decoration-navy-800/30 underline-offset-4 hover:decoration-navy-800"
+                      className="group/link -mb-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold sm:-mb-2 sm:text-sm text-navy-800 underline decoration-navy-800/30 underline-offset-4 hover:decoration-navy-800"
                     >
                       View device
                       <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
