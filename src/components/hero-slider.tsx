@@ -50,7 +50,7 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
         ))}
       </div>
 
-      <div className="container-page grid gap-8 pb-8 pt-24 md:pt-28 lg:min-h-[min(100dvh,860px)] lg:grid-cols-12 lg:items-center lg:gap-6">
+      <div className="container-page grid grid-cols-1 gap-8 pb-8 pt-24 md:pt-28 lg:min-h-[min(100dvh,860px)] lg:grid-cols-12 lg:items-center lg:gap-6">
         <div className="lg:col-span-6">{children}</div>
 
         <div className="flex flex-col lg:col-span-6 lg:self-stretch">
@@ -156,9 +156,9 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
             >
               {paused ? <Play className="size-4" /> : <Pause className="size-4" />}
             </SlideButton>
-            <ol className="ml-3 flex flex-1 gap-2">
+            <ol className="ml-3 flex min-w-0 flex-1 gap-2">
               {slides.map((s, i) => (
-                <li key={s.slug} className="flex-1">
+                <li key={s.slug} className="min-w-0 flex-1">
                   <button
                     type="button"
                     aria-label={`Show ${s.name}`}
@@ -177,7 +177,7 @@ export function HeroSlider({ slides, children }: { slides: HeroSlide[]; children
                       )}
                     </span>
                     <span
-                      className={`truncate text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors ${i === index ? "text-navy-950" : "text-navy-900/55"}`}
+                      className={`hidden truncate text-[11px] font-semibold sm:block uppercase tracking-[0.12em] transition-colors ${i === index ? "text-navy-950" : "text-navy-900/55"}`}
                     >
                       {s.brand}
                     </span>

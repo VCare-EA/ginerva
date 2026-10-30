@@ -236,7 +236,7 @@ function Quality() {
 
         <ol className="relative lg:col-span-6 lg:col-start-7">
           <span aria-hidden className="absolute bottom-0 left-[1.15rem] top-0 w-px bg-white/10" />
-          <span aria-hidden data-progress className="absolute bottom-0 left-[1.15rem] top-0 w-px origin-top bg-mint" />
+          <span aria-hidden data-progress suppressHydrationWarning className="absolute bottom-0 left-[1.15rem] top-0 w-px origin-top bg-mint" />
           {qualitySteps.map((step, i) => (
             <li key={step.title} data-reveal className="relative pb-16 pl-16 last:pb-0">
               <span
@@ -260,9 +260,15 @@ function Leadership() {
   return (
     <section aria-labelledby="leadership-heading" className="container-page grid gap-10 py-16 md:py-24 lg:grid-cols-12 lg:items-center">
       <div className="lg:col-span-4">
-        <div data-reveal className="relative mx-auto flex aspect-square w-full max-w-sm flex-col justify-between overflow-hidden rounded-[var(--radius-stage)] bg-[linear-gradient(145deg,var(--color-navy-950),var(--color-navy-600))] p-8">
-          <SpeedLines unit={14} />
-          <span className="font-serif text-[8rem] italic leading-[0.8] text-white">CP</span>
+        <div data-reveal className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[var(--radius-stage)] bg-navy-950 p-8">
+          <Image
+            src="/leader-placeholder.jpg"
+            alt={`Portrait of ${leader.name}`}
+            fill
+            sizes="(min-width: 1024px) 384px, 90vw"
+            className="object-cover object-top"
+          />
+          <SpeedLines unit={14} className="relative" />
         </div>
       </div>
       <div className="lg:col-span-7 lg:col-start-6">

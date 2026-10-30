@@ -117,7 +117,8 @@ export function SpeedLines({ className = "", unit = 14 }: { className?: string; 
       {lines.map((l, i) => (
         <div key={i} className="flex items-center" style={{ paddingLeft: l.offset * unit * 1.6, gap: unit * 0.45 }}>
           <span className={`shrink-0 rounded-full ${l.solid}`} style={{ width: unit, height: unit }} />
-          <span data-speedline className="relative block origin-left" style={{ width: unit * 5.5, height: unit }}>
+          {/* MotionRoot hydrates before streamed page content and writes the GSAP transform into this style first. */}
+          <span data-speedline suppressHydrationWarning className="relative block origin-left" style={{ width: unit * 5.5, height: unit }}>
             <span className={`absolute inset-y-0 left-0 w-full rounded-full ${l.soft}`} />
             <span className={`absolute inset-y-0 right-0 w-[62%] rounded-full ${l.solid}`} />
           </span>

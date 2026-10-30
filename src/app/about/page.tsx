@@ -25,6 +25,7 @@ export default function AboutPage() {
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             data-parallax="30"
+            suppressHydrationWarning
             className="product-shot scale-110 p-10"
           />
         </div>

@@ -96,7 +96,7 @@ export function ProductExplorer({
           {count} {count === 1 ? "product" : "products"} {limit && count > limit ? "match" : "shown"}
         </p>
         {limit && count > limit && (
-          <Link href={catalogueHref} className="font-medium text-navy-700 underline underline-offset-4">
+          <Link href={catalogueHref} className="inline-flex min-h-11 items-center font-medium text-navy-700 underline underline-offset-4">
             See all {count}
           </Link>
         )}
