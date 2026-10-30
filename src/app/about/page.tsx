@@ -20,13 +20,13 @@ export default function AboutPage() {
       <section className="container-page grid gap-10 pb-16 md:pb-20 lg:grid-cols-12 lg:items-center">
         <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-stage)] bg-stage lg:col-span-6">
           <Image
-            src="/products/ir-therapy-panel/1.jpg"
-            alt="Ginerva infrared therapy panel"
+            src="/about-clinic.jpg"
+            alt="A clinician treating a patient's arm with the Skynis Trim & Firm massage roller in a bright clinic"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             data-parallax="30"
             suppressHydrationWarning
-            className="product-shot scale-110 p-10"
+            className="scale-110 object-cover object-[50%_45%]"
           />
         </div>
         <div className="lg:col-span-5 lg:col-start-8">

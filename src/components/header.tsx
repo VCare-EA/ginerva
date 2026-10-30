@@ -4,14 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { featuredProducts } from "@/content/products";
 import { nav, specialities } from "@/content/site";
-import { BrandStripe, Logo } from "./ui";
+import { BrandStripe, Logo, SocialLinks } from "./ui";
 
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [farDown, setFarDown] = useState(false);
   const [open, setOpen] = useState(false);
   const [openedAt, setOpenedAt] = useState(pathname);
 
@@ -19,7 +20,10 @@ export function Header() {
   if (open && openedAt !== pathname) setOpen(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      setFarDown(window.scrollY > window.innerHeight);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -83,6 +87,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <SocialLinks className="hidden xl:flex" linkClassName="text-white/70 hover:bg-white/10 hover:text-white" />
           <Link
             href="/contact"
             className="hidden min-h-11 items-center rounded-full bg-mint px-5 text-sm font-semibold text-ink transition-colors hover:bg-mint-soft active:translate-y-px sm:inline-flex"
@@ -131,8 +136,22 @@ export function Header() {
           >
             Enquire now
           </Link>
+          <SocialLinks className="mt-3 justify-center" linkClassName="text-navy-700 hover:bg-porcelain" />
         </nav>
       )}
+
+      <button
+        type="button"
+        aria-label="Back to top"
+        onClick={() =>
+          window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
+        }
+        className={`fixed bottom-5 right-5 grid size-12 cursor-pointer place-items-center rounded-full bg-navy-950 text-white shadow-[0_14px_30px_-12px_rgb(7_14_46/0.6)] ring-1 ring-white/15 transition-[opacity,transform,visibility,background-color] duration-300 hover:bg-navy-700 active:translate-y-px md:bottom-8 md:right-8 ${
+          farDown ? "opacity-100" : "invisible translate-y-3 opacity-0"
+        }`}
+      >
+        <ArrowUp aria-hidden className="size-5" />
+      </button>
     </header>
   );
 }

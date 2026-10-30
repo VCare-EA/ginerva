@@ -9,6 +9,12 @@ export const site = {
   description:
     "Ginerva Universal Corporation LLP assembles, manufactures and distributes medical devices for the aesthetic, orthopaedic and dental sectors from an ISO 13485 certified, cleanroom-equipped facility in Puducherry, India.",
   email: "care@ginerva.com",
+  // Placeholder platform URLs until the client supplies Ginerva's profile links.
+  socials: [
+    { platform: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/" },
+    { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/" },
+    { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
+  ],
   addresses: [
     {
       label: "Factory",

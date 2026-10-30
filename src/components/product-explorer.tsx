@@ -32,6 +32,7 @@ export function ProductExplorer({
   const [filter, setFilter] = useState<Filter>(initial);
   const grid = useRef<HTMLUListElement>(null);
   const flipState = useRef<Flip.FlipState | null>(null);
+  const gridHeight = useRef(0);
 
   const matches = (p: Product) =>
     (!filter.concern || p.concerns.includes(filter.concern)) && (!filter.brand || p.brandLine === filter.brand);
@@ -43,6 +44,7 @@ export function ProductExplorer({
   const update = (next: Filter) => {
     if (grid.current && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
       flipState.current = Flip.getState(grid.current.children);
+      gridHeight.current = grid.current.offsetHeight;
     }
     setFilter(next);
     if (syncUrl) {
@@ -54,7 +56,13 @@ export function ProductExplorer({
   };
 
   useLayoutEffect(() => {
-    if (!flipState.current) return;
+    if (!flipState.current || !grid.current) return;
+    // Without this the grid's height snaps, yanking everything below it (and the scroll position near the page end).
+    gsap.fromTo(
+      grid.current,
+      { height: gridHeight.current },
+      { height: grid.current.offsetHeight, duration: 0.6, ease: "expo.out", clearProps: "height" },
+    );
     Flip.from(flipState.current, {
       duration: 0.6,
       ease: "expo.out",

@@ -142,13 +142,14 @@ function SpecialityBento() {
           <span className="relative z-10 inline-flex items-center gap-2 font-medium text-navy-700">
             Explore the range <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </span>
-          <div className="absolute -bottom-6 right-0 h-[72%] w-[62%] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-3">
+          {/* Animate the image, not this wrapper: a transformed wrapper isolates the multiply blend and exposes the photo's white background. */}
+          <div className="absolute -bottom-6 right-0 h-[72%] w-[62%]">
             <Image
               src="/products/skynis-needleless-mesotherapy/1.jpg"
               alt=""
               fill
               sizes="(min-width: 768px) 40vw, 60vw"
-              className="product-shot object-bottom"
+              className="product-shot origin-bottom object-bottom transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-3 group-hover:scale-[1.03]"
             />
           </div>
         </Link>

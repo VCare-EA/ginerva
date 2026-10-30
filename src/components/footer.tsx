@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { products } from "@/content/products";
 import { certifications, nav, site, specialities, verifiedCertifications } from "@/content/site";
-import { BrandStripe, Logo, SpeedLines } from "./ui";
+import { BrandStripe, Logo, SocialLinks, SpeedLines } from "./ui";
 
 const legal = [
   { href: "/legal/privacy", label: "Privacy policy" },
@@ -24,6 +24,7 @@ export function Footer() {
           >
             {site.email}
           </a>
+          <SocialLinks className="-ml-3 mt-4" linkClassName="text-white/70 hover:bg-white/10 hover:text-white" />
           <ul className="mt-8 flex flex-wrap gap-2" aria-label="Certifications">
             {verifiedCertifications.map((id) => (
               <li key={id} className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/80">
